@@ -42,7 +42,80 @@ public class DBManager {
         return setMovies(resObj);
     }
     
+    public Movie addMovie(Movie m) throws SQLException {
+        query = "INSERT INTO Movie (id, name, description, genre, releaseDate, runtime, keywords, rating, price, status) "
+                + "VALUES ("
+                +m.getId()+","
+                +"'"+m.getName()+"',"
+                +"'"+m.getDescription()+"',"
+                +"'"+m.getGenre()+"',"
+                +"'"+m.getReleaseDate()+"',"
+                +m.getRuntime()+","
+                +"'"+m.getKeywords()+"',"
+                +m.getRating()+","
+                +m.getPrice()+","
+                +"'"+m.getStatus()+"'"
+                +")";
+        
+//        System.out.println("addMovie statement\n\n"+query+"\n");
+        int executeUpdate = st.executeUpdate(query);
+        System.out.println("addMovie executeUpdate = "+executeUpdate+"\n");
+        return m;
+    }
     
+    public Movie updateMovie(Movie m) throws SQLException {
+        query = "UPDATE Movie SET "
+                + "name = '"+m.getName()+"', "
+                +"description = '"+m.getDescription()+"',"
+                +"genre = '"+m.getGenre()+"',"
+                +"releaseDate = '"+m.getReleaseDate()+"',"
+                +"runtime = "+m.getRuntime()+","
+                +"keywords = '"+m.getKeywords()+"',"
+                +"rating = "+m.getRating()+","
+                +"price = "+m.getPrice()+","
+                +"status = '"+m.getStatus()+"'"
+                + "WHERE id = "+m.getId();
+        System.out.println("updateMovie statement\n\n"+query+"\n");
+        int executeUpdate = st.executeUpdate(query);
+        System.out.println("updateMovie result: "+executeUpdate+"\n");
+        return m;
+    }
+    
+    public int deleteMovie(Movie m) throws SQLException {
+        query = "DELETE FROM Movie WHERE id = "+m.getId();
+        int executeUpdate = st.executeUpdate(query);
+        System.out.println("deleteMovie executeUpdate = "+executeUpdate+"\n");
+        return executeUpdate;
+    }
+    
+    public ArrayList<Movie> findMovieByName(String name) throws SQLException {
+        query = "SELECT * FROM Movie WHERE name LIKE '%"+name+"%' ORDER BY name";
+        resObj = st.executeQuery(query);
+        return setMovies(resObj);
+    }
+    
+    public ArrayList<Movie> findMovieByGenre(String genre) throws SQLException {
+        query = "SELECT * FROM Movie WHERE genre LIKE '%"+genre+"%' ORDER BY genre";
+        resObj = st.executeQuery(query);
+        return setMovies(resObj);
+    }
+    
+    public ArrayList<Movie> findMovieByHigestRating() throws SQLException {
+        query = "SELECT * FROM Movie ORDER BY rating DESC LIMIT 10";
+        resObj = st.executeQuery(query);
+        return setMovies(resObj);
+    }
+    
+    public long getNextIdMovie() throws SQLException {
+        long currentId = -1;
+        query = "SELECT id FROM Movie ORDER BY id DESC LIMIT 1";
+        resObj = st.executeQuery(query);
+        while (resObj.next()) {
+            currentId = resObj.getLong("id");
+        }
+        return ++currentId;
+    }
+     
     
     private ArrayList<Staff> setStaffs(ResultSet resObj) throws SQLException {
          ArrayList<Staff> staffs = new ArrayList<>();
@@ -63,7 +136,7 @@ public class DBManager {
     }
     
     private ArrayList<Movie> setMovies(ResultSet resObj) throws SQLException {
-        System.out.println("setMovies()");
+//        System.out.println("setMovies()");
         ArrayList<Movie> movies = new ArrayList<>();
         while (resObj.next()) {
             Movie movie = new Movie();
