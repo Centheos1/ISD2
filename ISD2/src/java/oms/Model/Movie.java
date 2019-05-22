@@ -22,12 +22,13 @@ public class Movie implements Serializable {
     private float rating;
     private double price;
     private String status;
+    private int numberOfCopies;
 
     public Movie() {
         super();
     }
 
-    public Movie(long id, String name, String description, String genre, String releaseDate, int runtime, String keywords, float rating, double price, String status) {
+    public Movie(long id, String name, String description, String genre, String releaseDate, int runtime, String keywords, float rating, double price, String status, int numberOfCopies) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -38,6 +39,7 @@ public class Movie implements Serializable {
         this.rating = rating;
         this.price = price;
         this.status = status;
+        this.numberOfCopies = numberOfCopies;
     }
 
     public long getId() {
@@ -119,6 +121,16 @@ public class Movie implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public int getNumberOfCopies() {
+        return numberOfCopies;
+    }
+
+    public void setNumberOfCopies(int numberOfCopies) {
+        this.numberOfCopies = numberOfCopies;
+    }
+
+    
     
     @Override
     public String toString() {

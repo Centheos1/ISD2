@@ -8,7 +8,14 @@ package oms.DAO;
 import oms.Model.Movie;
 import oms.Model.Staff;
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Random;
 
 /**
  *
@@ -43,7 +50,10 @@ public class DBManager {
     }
     
     public Movie addMovie(Movie m) throws SQLException {
-        query = "INSERT INTO Movie (id, name, description, genre, releaseDate, runtime, keywords, rating, price, status) "
+        
+        System.out.println(m.getPrice());
+        
+        query = "INSERT INTO Movie (id, name, description, genre, releaseDate, runtime, keywords, rating, price, status, numberOfCopies) "
                 + "VALUES ("
                 +m.getId()+","
                 +"'"+m.getName()+"',"
@@ -54,7 +64,8 @@ public class DBManager {
                 +"'"+m.getKeywords()+"',"
                 +m.getRating()+","
                 +m.getPrice()+","
-                +"'"+m.getStatus()+"'"
+                +"'"+m.getStatus()+"',"
+                +m.getNumberOfCopies()
                 +")";
         
 //        System.out.println("addMovie statement\n\n"+query+"\n");
@@ -73,7 +84,8 @@ public class DBManager {
                 +"keywords = '"+m.getKeywords()+"',"
                 +"rating = "+m.getRating()+","
                 +"price = "+m.getPrice()+","
-                +"status = '"+m.getStatus()+"'"
+                +"status = '"+m.getStatus()+"', "
+                +"numberOfCopies = "+m.getNumberOfCopies()+" "
                 + "WHERE id = "+m.getId();
         System.out.println("updateMovie statement\n\n"+query+"\n");
         int executeUpdate = st.executeUpdate(query);
@@ -115,6 +127,17 @@ public class DBManager {
         }
         return ++currentId;
     }
+    
+    public String getDateNow() {
+        String date = new SimpleDateFormat("yyyy/MM/dd").format(Calendar.getInstance().getTime());
+        return date;
+//        return "";
+    }
+    
+    public int getRandomInt(int max, int min) {
+        Random r = new Random();
+        return r.nextInt(max-min) + min;
+    }
      
     
     private ArrayList<Staff> setStaffs(ResultSet resObj) throws SQLException {
@@ -150,6 +173,7 @@ public class DBManager {
             movie.setRating(resObj.getFloat("rating"));
             movie.setPrice(resObj.getDouble("price"));
             movie.setStatus(resObj.getString("status"));
+            movie.setNumberOfCopies(resObj.getInt("numberOfCopies"));
             movies.add(movie);
         }
         return movies;

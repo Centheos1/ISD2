@@ -50,7 +50,8 @@ public class TestDB {
                      "please,work,for,me",
                      (float)1.7,
                      0.99,
-                     "UNTESTED"
+                     "UNTESTED",
+                     5
              );
              
              m = db.addMovie(m);

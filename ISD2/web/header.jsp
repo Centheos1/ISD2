@@ -10,19 +10,19 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>OMOA</title>
     </head>
     <body>
            <ul>
-  <li><a class="active" href="#home">Home</a></li>
+  <li><a class="active" href="/ISD2/index.jsp">Home</a></li>
 
     <div class="dropdown">
         
         <button class="dropbtn"> Movies <i class="fa fa-caret-down"></i> </button>
     <div class="dropdown-content">
-        <a href="#">List or Search Movies</a>
-        <a href="#">View Saved Movies</a>
-        <a href="#">Update/Delete Saved Movies</a>
+        <a href="/ISD2/movie/addmovie.jsp">Add Movie</a>
+        <a href="/ISD2/movie/moviesearch.jsp">Search Movies</a>
+        <a href="/ISD2/movie/movieupdatedelete.jsp">Update/Delete Movie</a>
  
     </div>
     </div> 

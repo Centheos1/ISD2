@@ -36,6 +36,13 @@
                 session.setAttribute("highestRatedMovies", movies);
             }
         }
+        session.setAttribute("error", null);
+        session.setAttribute("name", null);
+        session.setAttribute("description", null);
+        session.setAttribute("genre", null);
+        session.setAttribute("price", null);
+        session.setAttribute("numberOfCopies", null);
+        session.setAttribute("status", null);
     %>
     <body>
       
@@ -47,36 +54,27 @@
           
           <h2> <u>Trending Movies </u> </h2>
         
-        <table>
-            
-            <th>Name</th>
-            <th>Genre</th>
-            <th>Rating</th>
-            <th>Price</th>
-            <th></th>
-            
-<!--            <tr>
-                <th> Avengers End Game </th>
-                <th> The Final Battle </th>
-                <th> $200.00 </th> 
-                <th> <button> Select </button> </th>
-            </tr>-->
-            <form action="index.jsp" method="post" >
+        <table> 
+            <thead>
+                <th>Name</th>
+                <th>Genre</th>
+                <th>Rating</th>
+                <th>Price</th>
+                <th></th>
+            </thead>
                 <%
                     if (movies != null) {
                         for (Movie m : movies) {
-
+                            String url = "movie/viewmovie.jsp?selected="+m.getId();
+                            //out.println(url);
                 %>
                             <tr>
                                 <td><%= m.getName()%></td>
                                 <td><%= m.getGenre()%></td>
                                 <td><%= m.getRating()%></td> 
                                 <td>$<%= m.getPrice()%></td> 
-                                <td><%= m.getId()%></td> 
-                                <td>
-                                    <input type="hidden" value="<%= m.getId()%>" name="selected">
-                                    <!--<input type="hidden" value="<%= m.getId()%>" name="<%= m.getId()%>">-->
-                                    <button type="submit"> Select </button> 
+                                <td style="text-align: center;">
+                                    <button type="submit"><a href="<%=url%>" style="text-decoration: none; color: black;">Select</a></button> 
                                 </td>
                             </tr>
                 <%
@@ -84,27 +82,10 @@
                     }
                 %>   
                 <tr>
-                    <th> <a href=""> More Movies </a> </th>
-
+                    <th> <a href="movie/moviesearch.jsp"> More Movies </a> </th>
                 </tr>
-
             </table>     
-        </form>
-        <%
-            if (request.getParameter("selected") != null) {
-//                out.println(request.getParameter("selected"));
-//                if ("POST".equalsIgnoreCase(request.getMethod())) {
-                    out.println(request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
-//                }
-                Movie selectedMovie = null;
-                
-        %>
-        <H1><%=request.getParameter("selected") %></H1>
-        <%
-            }
-        %>
-        
-          <!--<h1>{$staff.firstName} {$staff.getLastName}</h1>-->
+
           <jsp:include page="/ConnServlet" flush="true" />
     </body>
 </html>
