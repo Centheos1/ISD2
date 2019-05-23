@@ -1,7 +1,7 @@
 <%-- 
     Document   : viewmovie
     Created on : 08/05/2019, 10:02:01 AM
-    Author     : Mawgee.Okura
+    Author     : clint
 --%>
 <link href="../CSS.css" rel="stylesheet" type="text/css">
 <%@include file="../header.jsp"%>
@@ -36,8 +36,9 @@
                     <tr><th>Run Time</th><td><%=movie.getRuntime()%> minutes</td></tr>
                     <tr><th>Rating</th><td><%=movie.getRating()%></td></tr>
                     <tr><th>Price</th><td>$<%=movie.getPrice()%></td></tr>
+                    <tr><th>Number of Copies</th><td><%=movie.getNumberOfCopies()%></td></tr>
                     <tr>
-                        <td style="min-width: 400px;"> <a href="movieupdatedelete.jsp"><strong>Update or Delete:</strong> <%=movie.getName()%></a> </td>
+                        <td style="min-width: 400px;"> <a href="/ISD2/movie/movieupdatedelete.jsp"><strong>Update or Delete:</strong> <%=movie.getName()%></a> </td>
                     </tr>
                 </table>
     <%

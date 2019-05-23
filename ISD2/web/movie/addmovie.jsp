@@ -1,7 +1,7 @@
 <%-- 
     Document   : addmovie
     Created on : 08/05/2019, 9:51:24 AM
-    Author     : Mawgee.Okura
+    Author     : clint
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="../CSS.css" rel="stylesheet" type="text/css">
@@ -54,7 +54,7 @@
                         </select>
                     </td>
                 </tr>
-                <tr><th>Number of Copies</th><td><input type="number" name="numberOfCopies" value="<%=numberOfCopies%>"></td></tr>
+                <tr><th>Number of Copies</th><td><input type="number" name="numberOfCopies" value="<%=numberOfCopies%>" min="0"></td></tr>
                 <tr>
                     <th>Status</th>
                     <td>

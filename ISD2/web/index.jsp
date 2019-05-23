@@ -36,6 +36,7 @@
                 session.setAttribute("highestRatedMovies", movies);
             }
         }
+        session.setAttribute("selectedMovie", null);
         session.setAttribute("error", null);
         session.setAttribute("name", null);
         session.setAttribute("description", null);
@@ -82,7 +83,7 @@
                     }
                 %>   
                 <tr>
-                    <th> <a href="movie/moviesearch.jsp"> More Movies </a> </th>
+                    <th> <a style="text-decoration: none; color: blue;" href="movie/moviesearch.jsp"> More Movies </a> </th>
                 </tr>
             </table>     
 

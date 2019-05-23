@@ -1,7 +1,7 @@
 <%-- 
     Document   : movieupdatedelete
     Created on : 08/05/2019, 9:50:18 AM
-    Author     : Mawgee.Okura
+    Author     : clint
 --%>
 <link href="../CSS.css" rel="stylesheet" type="text/css">
 <%@include file="../header.jsp"%>
@@ -62,7 +62,7 @@
                             </select>
                         </td>
                     </tr>
-                    <tr><th>Number of Copies</th><td><input type="number" name="numberOfCopies" value="<%=numberOfCopies%>"></td></tr>
+                    <tr><th>Number of Copies</th><td><input type="number" name="numberOfCopies" value="<%=numberOfCopies%>" min="0"></td></tr>
                     <tr>
                         <th>Status</th>
                         <td>
@@ -74,7 +74,8 @@
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: center;">
-                            <input name="submit" type="submit" value="Add Movie">
+                            <input name="update" type="submit" value="Update Movie">
+                            <input name="delete" type="submit" value="Delete Movie">
                         </td>
                     </tr>
                 </table>

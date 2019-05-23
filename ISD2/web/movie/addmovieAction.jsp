@@ -53,8 +53,9 @@
                 session.setAttribute("error", "You need at least one genre.");
                 session.setAttribute("genre", null);
             }
-//            double price = Double.parseDouble(request.getParameter("price"));
-//            session.setAttribute("price", Double.toString(price));
+            double price = Double.parseDouble(request.getParameter("price"));
+            price = db.round(price);
+            session.setAttribute("price", Double.toString(price));
             
             if (!request.getParameter("numberOfCopies").equals("")) {
                 numberOfCopies = Integer.parseInt(request.getParameter("numberOfCopies"));
@@ -78,14 +79,30 @@
                         db.getRandomInt(180,30),
                         "",
                         db.getRandomInt(10, 0),
-                        6.99,
+                        price,
                         status,
                         numberOfCopies
                 );
                 db.addMovie(m);
-                response.sendRedirect("/ISD2/index.jsp");
+//                response.sendRedirect("/ISD2/index.jsp");
+        %>
+                <!--<form action="IDS2/index.jsp">-->
+                <div style="text-align: center">
+                    <table style="border: 1px solid black; align: center">
+                        <tr>
+                            <td><h3><%=m.getName()%> successfully added.</h3></td>
+                        </tr>
+                        <tr>
+                            <td>
+                            <!--<td><input name="submit" type="submit" value="Continue"></td>-->
+                                <button type="submit"><a href="/ISD2/index.jsp" style="text-decoration: none; color: black;">Continue</a></button> 
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--</form>-->
+        <%
             }
         %>
-        <h1>Hello World!</h1>
     </body>
 </html>

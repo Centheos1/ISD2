@@ -5,6 +5,8 @@
  */
 package oms.DAO;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import oms.Model.Movie;
 import oms.Model.Staff;
 import java.sql.*;
@@ -65,7 +67,7 @@ public class DBManager {
                 +m.getRating()+","
                 +m.getPrice()+","
                 +"'"+m.getStatus()+"',"
-                +m.getNumberOfCopies()
+                +m.getNumberOfCopies() 
                 +")";
         
 //        System.out.println("addMovie statement\n\n"+query+"\n");
@@ -107,7 +109,9 @@ public class DBManager {
     }
     
     public ArrayList<Movie> findMovieByGenre(String genre) throws SQLException {
-        query = "SELECT * FROM Movie WHERE genre LIKE '%"+genre+"%' ORDER BY genre";
+//        query = "SELECT * FROM Movie WHERE genre LIKE '%"+genre+"%' ORDER BY genre";
+        query = "SELECT * FROM Movie WHERE genre IN ("+genre+") ORDER BY genre";
+        System.out.println(query);
         resObj = st.executeQuery(query);
         return setMovies(resObj);
     }
@@ -139,6 +143,21 @@ public class DBManager {
         return r.nextInt(max-min) + min;
     }
      
+    public double round(double x) {
+        BigDecimal bd = new BigDecimal(x);
+        bd = bd.setScale(2, RoundingMode.HALF_UP);
+        System.out.println("Rounded number: "+bd.doubleValue());
+        return bd.doubleValue();
+    }
+    
+    public <T> ArrayList<T> removeDuplicates(ArrayList<T> list) 
+    { 
+        Set<T> set = new LinkedHashSet<>(); 
+        set.addAll(list); 
+        list.clear(); 
+        list.addAll(set); 
+        return list; 
+    }  
     
     private ArrayList<Staff> setStaffs(ResultSet resObj) throws SQLException {
          ArrayList<Staff> staffs = new ArrayList<>();
