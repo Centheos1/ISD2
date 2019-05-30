@@ -6,7 +6,7 @@
 <%@page import="java.util.stream.Collectors"%>
 <link href="../CSS.css" rel="stylesheet" type="text/css">
 <%@include file="../header.jsp"%>
-
+<%@include file="../footer.jsp"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*" %>
 <%@page import="oms.DAO.*" %>

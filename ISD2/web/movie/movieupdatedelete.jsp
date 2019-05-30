@@ -22,7 +22,7 @@
         <%
             Movie movie = (Movie)session.getAttribute("selectedMovie");
             if (null != movie) {
-                out.println("Movie "+movie.toString());
+//                out.println("Movie "+movie.toString());
                 
                 String name = session.getAttribute("name") == null ? movie.getName() : session.getAttribute("name").toString();
                 String description = session.getAttribute("description") == null ? movie.getDescription() : session.getAttribute("description").toString();

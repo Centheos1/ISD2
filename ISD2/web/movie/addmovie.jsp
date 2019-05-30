@@ -6,7 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="../CSS.css" rel="stylesheet" type="text/css">
 <%@include file="../header.jsp"%>
-
+<%@include file="../footer.jsp"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,6 +16,7 @@
     </head>
     <body>
         <%
+           
             String name = session.getAttribute("name") == null ? "" : session.getAttribute("name").toString();
             String description = session.getAttribute("description") == null ? "" : session.getAttribute("description").toString();
             String genre = session.getAttribute("genre") == null ? "" : session.getAttribute("genre").toString();

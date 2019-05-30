@@ -57,10 +57,12 @@ CREATE TABLE Customer (
 	phone VARCHAR(12),
 	createDate DATETIME,
 	paymentDetailsId BIGINT,
+	roleId BIGINT,
 
 	PRIMARY KEY (id)
 );
 ALTER TABLE Customer ADD CONSTRAINT FK_paymentDetails_Id FOREIGN KEY (paymentDetailsId) REFERENCES PaymentDetails (id);
+ALTER TABLE Customer ADD CONSTRAINT FK_customer_role_Id FOREIGN KEY (roleId) REFERENCES Role (id);
 
 -- 5
 CREATE TABLE User (
@@ -137,13 +139,34 @@ CREATE TABLE AdminLog (
 );
 ALTER TABLE AdminLog ADD CONSTRAINT FK_user_Id FOREIGN KEY (userId) REFERENCES User (id);
 
+--10
+CREATE TABLE LoginTable (
+	id BIGINT NOT NULL AUTO_INCREMENT,
+	password VARCHAR(255),
+	loginDetails VARCHAR(255),
+	logoutDetails VARCHAR(255),
+
+	PRIMARY KEY (id)
+);
+
 -- Insert Statments
 
 INSERT INTO Role (id, permission, status, updateDate) VALUES (1, 'FULL_ACCESS', 'Active', '2019-04-01 17:10:04');
 INSERT INTO Role (id, permission, status, updateDate) VALUES (2, 'STAFF', 'Active', '2019-04-01 17:15:26');
 INSERT INTO Role (id, permission, status, updateDate) VALUES (3, 'ADMINISTRATOR', 'Active', '2019-04-01 17:20:14');
+INSERT INTO Role (id, permission, status, updateDate) VALUES (4, 'CUSTOMER', 'Active', '2019-04-01 17:20:14');
 
 INSERT INTO Staff (id, firstName, lastName, password, email, phone, createDate, roleId) VALUES (1, 'Clint', 'Sellen','pass','clint@omoa.com','04123456780', '2019-04-01 17:20:14', 1 );
+
+INSERT INTO PaymentDetails (id,cardNumber,cvc,expiryMonth,expiryYear,address1,address2,state,postcode) VALUES (1,'4111111111111111',123,'04','2020','1 Street Rd','','NSW',2000);
+
+INSERT INTO Customer(id, firstName, lastName, password, email, phone, createDate,paymentDetailsId,roleId) VALUES (1,"First", "Customer", "pass", "register@me.com", "0487654321","2019-04-01 17:15:26",1,4);
+
+INSERT INTO OrderDetails (id,movie_1_Id,movie_2_Id,movie_3_Id,movie_4_Id,movie_5_Id) VALUES (1,1,3,10,11,12);
+
+--INSERT INTO User (id,customerId,staffId) VALUES (1,1,NULL);
+
+INSERT INTO Orders (id,orderDate,userId,orderDetailsId,paymentDetailsId) VALUES (1,'2019-04-01 17:20:14',1,1,1);
 
 
 INSERT INTO Movie (id, name, description, genre, releaseDate, runtime, keywords, rating, price, status,numberOfCopies) VALUES (1,'Avatar','In the 22nd century, a paraplegic Marine is dispatched to the moon Pandora on a unique mission, but becomes torn between following orders and protecting an alien civilization.','Action, Adventure, Fantasy, Science Fiction','2009-12-10',162,'culture clash, future, space war, space colony, society, space travel, futuristic, romance, space, alien, tribe, alien planet, cgi, marine, soldier, battle, love affair, anti war, power relations, mind and soul, 3d',7.2,6.99,'Released', 10);
