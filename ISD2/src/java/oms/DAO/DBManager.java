@@ -562,6 +562,7 @@ public class DBManager {
 
         ArrayList<Customer> customerList = new ArrayList<Customer>();
         System.out.println("all customers SQL: " + query);
+        st.setMaxRows(50);
         ResultSet results = st.executeQuery(query);
         int num = 0;
 
@@ -583,10 +584,11 @@ public class DBManager {
             int sID = results.getInt("ID");
 
             String sRoleId = results.getString("roleId");
-            String sPaymentDetailsId = resObj.getString("paymentDetailsId");
+            String sPaymentDetailsId = results.getString("paymentDetailsId");
+//            String sPaymentDetailsId = resObj.getString("paymentDetailsId");
 
             Customer customer = new Customer(sID, firstname, lastname, password, email, phone, createdate, Integer.parseInt(sPaymentDetailsId), Integer.parseInt(sRoleId));
-
+            
             customerList.add(customer);
 
         }

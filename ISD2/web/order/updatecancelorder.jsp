@@ -13,18 +13,28 @@
     Connection conn = connector.openConnection();
     DBManager db = new DBManager(conn);
     Register viewuser = (Register) session.getAttribute("loggedin");// get current user
-    Customer curCustormer = db.findCustomer(viewuser.getEmail());
+    
+    if (viewuser != null && !viewuser.getEmail().equals("error")) {
+        out.print("viewuser: "+viewuser.getEmail());
 
-    int userPaymentId = curCustormer.getPaymentdetailsid();
-    OrderDetails order = db.findOrderDetails(userPaymentId);//get the current user ID
-//      String orderDate = order.getorderDate();
-//      int userId = order.getuserId();
-//      int orderDetailsid = order.getorderDetailsId();
-//      int paymentDetailsId = order.getpaymentDetailsId();
+        Customer curCustormer = db.findCustomer(viewuser.getEmail());
 
-    db.deleteOrder(order.getID());//delete the order details of current id 
+    //    out.print("viewuser: "+curCustormer.getEmail());
 
-//    response.sendRedirect("vieworders.jsp");
+        int userPaymentId = curCustormer.getPaymentdetailsid();
+        OrderDetails order = db.findOrderDetails(userPaymentId);//get the current user ID
+    //      String orderDate = order.getorderDate();
+    //      int userId = order.getuserId();
+    //      int orderDetailsid = order.getorderDetailsId();
+    //      int paymentDetailsId = order.getpaymentDetailsId();
+
+        db.deleteOrder(order.getID());//delete the order details of current id 
+
+        response.sendRedirect("./vieworders.jsp");
+    } else {
+//        reditect me to login
+    }
+
 %>
 <!DOCTYPE html>
 <html>

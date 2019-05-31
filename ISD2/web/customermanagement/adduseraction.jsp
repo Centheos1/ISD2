@@ -8,7 +8,7 @@
 <%@page import="oms.Model.*" %>
 <%@page import="oms.DAO.*" %>
 <%@page import="java.util.Date"%>
-<jsp:include page="/ConnServlet" flush="true" />
+<%--<jsp:include page="/ConnServlet" flush="true" />--%>
 <!DOCTYPE html>
 <%
     SimpleDateFormat sdf = new SimpleDateFormat();
@@ -24,7 +24,7 @@
 
     
     <%
-        DBManager manager = (DBManager) session.getAttribute("manager");
+        DBManager manager = (DBManager) session.getAttribute("db");
         
         if (manager != null) {
             

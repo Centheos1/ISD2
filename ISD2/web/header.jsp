@@ -60,9 +60,9 @@
 
                 <button class="dropbtn"> Payment <i class="fa fa-caret-down"></i> </button>
                 <div class="dropdown-content">
-                    <a href="/ISD2/payment/addpaymentdetails.jsp">Add Payment Details</a>
+                    <a href="/ISD2/payment/addpaymentdetails.jsp">Add Or Update Payment Details</a>
                     <a href="/ISD2/payment/viewpayments.jsp">View Payment Details</a>
-                    <a href="/ISD2/payment/updatedeletepayments.jsp">Update/Delete Payment Details</a>
+                    <a href="/ISD2/payment/updatedeletepayments.jsp">Delete Payment Details</a>
                 </div>
             </div> 
 
@@ -71,8 +71,10 @@
                 <button class="dropbtn"> Customer Management <i class="fa fa-caret-down"></i> </button>
                 <div class="dropdown-content">
                     <a href="/ISD2/customermanagement/adduser.jsp">Add User</a>
-                    <a href="/ISD2/shipment/checkCurrentUser.jsp">View Shipment Details</a>
-                    <a href="/ISD2/shipment/updatedeleteshipment.jsp">Delete User</a>
+                    <a href="/ISD2/customermanagement/searchuser.jsp">Search User</a>
+                    <a href="/ISD2/customermanagement/deleteuser.jsp">Delete User</a>
+                    <a href="/ISD2/customermanagement/updateuser.jsp">Update User</a>
+                    <a href="/ISD2/customermanagement/usermanagement.jsp">View Users</a>
                 </div>
             </div> 
 
