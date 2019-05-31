@@ -84,7 +84,7 @@
                 <div class="dropdown-content">
                     <!--<a href="/ISD2/order/addorder.jsp">Create Orders</a>-->
                     <a href="/ISD2/order/checkCurrentOrder.jsp">View Orders</a>
-                    <a href="/ISD2/order/updatecancelorder.jsp">Update/Cancel Orders</a>
+                    <a href="/ISD2/order/checkCurrentCancelpage.jsp">Update/Cancel Orders</a>
 
                 </div>
             </div> 

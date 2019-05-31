@@ -1,8 +1,8 @@
 <%@page import="java.util.List"%>
 <%@page import="oms.Model.Customer"%>
 <link href="../CSS.css" rel="stylesheet" type="text/css">
-<%--<%@include file="../header.jsp"%>--%>
-<%--<%@include file="../footer.jsp"%>--%>
+<%@include file="../header.jsp"%>
+<%@include file="../footer.jsp"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="oms.DAO.DBManager"%>
@@ -21,32 +21,15 @@
         </head>
         <body>
 
-            <%                    ArrayList<Customer> customerList = new ArrayList<Customer>();
+            <%                    
+                ArrayList<Customer> customerList = new ArrayList<Customer>();
 
                 DBManager manager = (DBManager) session.getAttribute("db");
 
                 if (manager != null) {
-
                     customerList = manager.showAllCustomer();
-                    System.out.println("customerList:" + customerList.size());
-                    out.print("customer list size = " + customerList.size());
-
-                } else {
-                    System.out.println("Manager seems null!");
-                    out.println("Manager seems null!");
                 }
             %> 
-
-            <ul>
-                <li><a class="active" href="index.jsp">Home</a></li>
-
-                <div class="dropdown">
-
-                    <button class="dropbtn"> Pages will be available when completed registration or login<i class="fa fa-caret-down"></i> </button>
-
-                    <li id="register"> <a href="register.jsp"> Register </a> </li>
-                    <li id="login"> <a href="login.jsp"> Login </a> </li>
-            </ul>
 
             <h1 align="center"><B>User Management</b></h1>
             <h2 align="center"><B>View User List</b></h2>

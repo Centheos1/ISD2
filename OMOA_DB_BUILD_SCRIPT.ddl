@@ -65,15 +65,15 @@ ALTER TABLE Customer ADD CONSTRAINT FK_paymentDetails_Id FOREIGN KEY (paymentDet
 ALTER TABLE Customer ADD CONSTRAINT FK_customer_role_Id FOREIGN KEY (roleId) REFERENCES Role (id);
 
 -- 5
-CREATE TABLE User (
+CREATE TABLE Users (
 	id BIGINT NOT NULL AUTO_INCREMENT,
 	customerId BIGINT,
 	staffId BIGINT,
 	
 	PRIMARY KEY (id)
 );
-ALTER TABLE User ADD CONSTRAINT FK_staff_Id FOREIGN KEY (staffId) REFERENCES Staff (id);
-ALTER TABLE User ADD CONSTRAINT FK_customer_Id FOREIGN KEY (customerId) REFERENCES Customer (id);
+ALTER TABLE Users ADD CONSTRAINT FK_staff_Id FOREIGN KEY (staffId) REFERENCES Staff (id);
+ALTER TABLE Users ADD CONSTRAINT FK_customer_Id FOREIGN KEY (customerId) REFERENCES Customer (id);
 
 -- 8
 CREATE TABLE Movie (
@@ -157,17 +157,6 @@ INSERT INTO Role (id, permission, status, updateDate) VALUES (3, 'ADMINISTRATOR'
 INSERT INTO Role (id, permission, status, updateDate) VALUES (4, 'CUSTOMER', 'Active', '2019-04-01 17:20:14');
 
 INSERT INTO Staff (id, firstName, lastName, password, email, phone, createDate, roleId) VALUES (1, 'Clint', 'Sellen','pass','clint@omoa.com','04123456780', '2019-04-01 17:20:14', 1 );
-
-INSERT INTO PaymentDetails (id,cardNumber,cvc,expiryMonth,expiryYear,address1,address2,state,postcode) VALUES (1,'4111111111111111',123,'04','2020','1 Street Rd','','NSW',2000);
-
-INSERT INTO Customer(id, firstName, lastName, password, email, phone, createDate,paymentDetailsId,roleId) VALUES (1,"First", "Customer", "pass", "register@me.com", "0487654321","2019-04-01 17:15:26",1,4);
-
-INSERT INTO OrderDetails (id,movie_1_Id,movie_2_Id,movie_3_Id,movie_4_Id,movie_5_Id) VALUES (1,1,3,10,11,12);
-
---INSERT INTO User (id,customerId,staffId) VALUES (1,1,NULL);
-
-INSERT INTO Orders (id,orderDate,userId,orderDetailsId,paymentDetailsId) VALUES (1,'2019-04-01 17:20:14',1,1,1);
-
 
 INSERT INTO Movie (id, name, description, genre, releaseDate, runtime, keywords, rating, price, status,numberOfCopies) VALUES (1,'Avatar','In the 22nd century, a paraplegic Marine is dispatched to the moon Pandora on a unique mission, but becomes torn between following orders and protecting an alien civilization.','Action, Adventure, Fantasy, Science Fiction','2009-12-10',162,'culture clash, future, space war, space colony, society, space travel, futuristic, romance, space, alien, tribe, alien planet, cgi, marine, soldier, battle, love affair, anti war, power relations, mind and soul, 3d',7.2,6.99,'Released', 10);
 INSERT INTO Movie (id, name, description, genre, releaseDate, runtime, keywords, rating, price, status,numberOfCopies) VALUES (2,'Pirates of the Caribbean: At World's End','Captain Barbossa, long believed to be dead, has come back to life and is headed to the edge of the Earth with Will Turner and Elizabeth Swann. But nothing is quite as it seems.','Adventure, Fantasy, Action','2007-05-19',169,'ocean, drug abuse, exotic island, east india trading company, love of one's life, traitor, shipwreck, strong woman, ship, alliance, calypso, afterlife, fighter, pirate, swashbuckler, aftercreditsstinger',6.9,6.99,'Released', 10);
@@ -4893,6 +4882,15 @@ INSERT INTO Movie (id, name, description, genre, releaseDate, runtime, keywords,
 INSERT INTO Movie (id, name, description, genre, releaseDate, runtime, keywords, rating, price, status,numberOfCopies) VALUES (4797,'Primer','Friends fledgling entrepreneurs invent a device in their garage that reduces the apparent mass of any object placed inside it, but they accidentally discover that it has some highly unexpected capabilities -- ones that could enable them to do and to have seemingly anything they want. Taking advantage of this unique opportunity is the first challenge they face. Dealing with the consequences is the next.','Science Fiction, Drama, Thriller','2004-10-08',77,'distrust, garage, identity crisis, time travel, time machine, mathematics, independent film, paradox, mechanical engineering',6.9,6.99,'Released', 10);
 INSERT INTO Movie (id, name, description, genre, releaseDate, runtime, keywords, rating, price, status,numberOfCopies) VALUES (4798,'Cavite','Adam, a security guard, travels from California to the Philippines, his native land, for his fathers funeral. He arrives in Manila. As he waits, a phone rings in his backpack. he answers it, and a male voice tells him that his mother and sister are captives and will be killed if Adam doesn\'t cooperate. Over the next hour, the voice sends Adam by bus, taxi, motorized tricycle, and on foot through an urban landscape of busy streets, cramped apartments, a fetid squatters camp, a bank, a cockfighting arena, and a church. Adam\'s conversations with the voice cover murder, Islam, jihad, rebellion in Mindanao, and his family. What is it Adam will be commanded to do?','Foreign, Thriller','2005-03-12',80,'',7.5,6.99,'Released', 10);
 
+INSERT INTO PaymentDetails (id,cardNumber,cvc,expiryMonth,expiryYear,address1,address2,state,postcode) VALUES (1,'4111111111111111',123,'04','2020','1 Street Rd','','NSW',2000);
+
+INSERT INTO Customer(id, firstName, lastName, password, email, phone, createDate,paymentDetailsId,roleId) VALUES (1,"First", "Customer", "pass", "register@me.com", "0487654321","2019-04-01 17:15:26",1,4);
+
+INSERT INTO OrderDetails (id,movie_1_Id,movie_2_Id,movie_3_Id,movie_4_Id,movie_5_Id) VALUES (1,1,3,10,11,12);
+
+INSERT INTO Users (id,customerId,staffId) VALUES (1,1,NULL);
+
+INSERT INTO Orders (id,orderDate,userId,orderDetailsId,paymentDetailsId) VALUES (1,'2019-04-01 17:20:14',1,1,1);
 
 
 -- drop table statements
@@ -4901,7 +4899,7 @@ DROP TABLE Orders;
 DROP TABLE AdminLog;
 DROP TABLE OrderDetails;
 DROP TABLE Movie;
-DROP TABLE User;
+DROP TABLE Users;
 DROP TABLE Staff;
 DROP TABLE Role;
 DROP TABLE Customer;

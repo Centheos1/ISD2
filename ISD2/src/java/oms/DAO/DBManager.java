@@ -362,6 +362,7 @@ public class DBManager {
     public OrderDetails findOrderDetails(int id) throws SQLException {
 
         query = "select * from OrderDetails where ID=" + id + "";
+//        query = "select * from Order where ID=" + id + "";
         st.setMaxRows(1);
         resObj = st.executeQuery(query);
 
@@ -383,6 +384,29 @@ public class DBManager {
             return null;
         }
     }
+    
+    
+    public Order getOrdersByPaymentId(int paymentDetailsId) throws SQLException {
+        
+        query = "SELECT * FROM Orders WHERE paymentDetailsId = "+paymentDetailsId;
+        st.setMaxRows(1);
+        resObj = st.executeQuery(query);
+        
+        boolean hasOrderId = resObj.next();
+        Order orders = null;
+        if (hasOrderId) {
+            int id = resObj.getInt("id");
+            String orderDate = resObj.getString("orderDate");
+            int userId = resObj.getInt("userId");
+            int orderDetailsId = resObj.getInt("orderDetailsId");
+            int oPaymentDetailsId = resObj.getInt("paymentDetailsId");
+            return orders = new Order(id, orderDate, userId, orderDetailsId, paymentDetailsId);
+        } else {
+            return null;
+        }
+    }
+    
+    
 
     public Order getOrderByDate(java.util.Date date) throws SQLException {
 
