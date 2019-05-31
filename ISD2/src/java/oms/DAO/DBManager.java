@@ -56,7 +56,8 @@ public class DBManager {
  * returns Movie 
 **/    
     public Movie getMovieById(long id) throws SQLException {
-        query = "SELECT * FROM Movie WHERE id = " + id + " LIMIT 1";
+        query = "SELECT * FROM Movie WHERE id = " + id;
+        st.setMaxRows(1);
         resObj = st.executeQuery(query);
         return setMovies(resObj).get(0);
     }
@@ -64,6 +65,7 @@ public class DBManager {
 //    returns all movies from database
     public ArrayList<Movie> getAllMovies() throws SQLException {
         query = "SELECT * FROM Movie";
+        st.setMaxRows(50);
         resObj = st.executeQuery(query);
         return setMovies(resObj);
     }
@@ -116,7 +118,7 @@ public class DBManager {
                 + "status = '" + m.getStatus() + "', "
                 + "numberOfCopies = " + m.getNumberOfCopies() + " "
                 + "WHERE id = " + m.getId();
-        System.out.println("updateMovie statement\n\n" + query + "\n");
+//        System.out.println("updateMovie statement\n\n" + query + "\n");
         int executeUpdate = st.executeUpdate(query);
         System.out.println("updateMovie result: " + executeUpdate + "\n");
         return m;
@@ -141,6 +143,7 @@ public class DBManager {
 **/
     public ArrayList<Movie> findMovieByName(String name) throws SQLException {
         query = "SELECT * FROM Movie WHERE name LIKE '%" + name + "%' ORDER BY name";
+        st.setMaxRows(50);
         resObj = st.executeQuery(query);
         return setMovies(resObj);
     }
@@ -152,6 +155,7 @@ public class DBManager {
 **/
     public ArrayList<Movie> findMovieByGenre(String genre) throws SQLException {
         query = "SELECT * FROM Movie WHERE genre IN (" + genre + ") ORDER BY genre";
+        st.setMaxRows(50);
         resObj = st.executeQuery(query);
         return setMovies(resObj);
     }
@@ -161,7 +165,8 @@ public class DBManager {
  * returns ArrayList<Movie> 
 **/
     public ArrayList<Movie> findMovieByHigestRating() throws SQLException {
-        query = "SELECT * FROM Movie ORDER BY rating DESC LIMIT 10";
+        query = "SELECT * FROM Movie ORDER BY rating DESC";
+        st.setMaxRows(10);
         resObj = st.executeQuery(query);
         return setMovies(resObj);
     }
@@ -172,7 +177,8 @@ public class DBManager {
 **/
     public long getNextIdMovie() throws SQLException {
         long currentId = -1;
-        query = "SELECT id FROM Movie ORDER BY id DESC LIMIT 1";
+        query = "SELECT id FROM Movie ORDER BY id DESC";
+        st.setMaxRows(10);
         resObj = st.executeQuery(query);
         while (resObj.next()) {
             currentId = resObj.getLong("id");
@@ -278,7 +284,7 @@ public class DBManager {
     public Customer findCustomer(String email) throws SQLException {
 
         query = "select * from Customer where email='" + email + "'";
-
+        st.setMaxRows(1);
         resObj = st.executeQuery(query);
 
         boolean hasCustomer = resObj.next();
@@ -315,7 +321,7 @@ public class DBManager {
     public Order findOrder(int id) throws SQLException {
 
         query = "select * from Orders where ID=" + id + "";
-
+        st.setMaxRows(1);
         resObj = st.executeQuery(query);
 
         boolean hasOrderId = resObj.next();
@@ -356,7 +362,7 @@ public class DBManager {
     public OrderDetails findOrderDetails(int id) throws SQLException {
 
         query = "select * from OrderDetails where ID=" + id + "";
-
+        st.setMaxRows(1);
         resObj = st.executeQuery(query);
 
         boolean hasOrderId = resObj.next();
@@ -381,7 +387,7 @@ public class DBManager {
     public Order getOrderByDate(java.util.Date date) throws SQLException {
 
         query = "select * from Orders where ORDERDATE=" + date + "";
-
+        st.setMaxRows(1);
         resObj = st.executeQuery(query);
 
         boolean hasOrderId = resObj.next();
@@ -449,7 +455,7 @@ public class DBManager {
     public Customer findCustomerByphone(String phone) throws SQLException {
 
         query = "select * from Customer where phone='" + phone + "'";
-
+        st.setMaxRows(1);
         resObj = st.executeQuery(query);
 
         boolean hasCustomer = resObj.next();
@@ -481,7 +487,8 @@ public class DBManager {
 
     public long getNextIdCustomer() throws SQLException {
         long currentId = -1;
-        query = "SELECT id FROM Customer ORDER BY id DESC LIMIT 1";
+        query = "SELECT id FROM Customer ORDER BY id DESC";
+        st.setMaxRows(1);
         resObj = st.executeQuery(query);
         while (resObj.next()) {
             currentId = resObj.getLong("id");
@@ -491,7 +498,8 @@ public class DBManager {
 
     public long getNextIdRole() throws SQLException {
         long currentId = -1;
-        query = "SELECT id FROM Role ORDER BY id DESC LIMIT 1";
+        query = "SELECT id FROM Role ORDER BY id DESC";
+        st.setMaxRows(1);
         resObj = st.executeQuery(query);
         while (resObj.next()) {
             currentId = resObj.getLong("id");
@@ -501,7 +509,8 @@ public class DBManager {
     
     public long getNextIdPaymentDetails() throws SQLException {
         long currentId = -1;
-        query = "SELECT id FROM PaymentDetails ORDER BY id DESC LIMIT 1";
+        query = "SELECT id FROM PaymentDetails ORDER BY id DESC";
+        st.setMaxRows(1);
         resObj = st.executeQuery(query);
         while (resObj.next()) {
             currentId = resObj.getLong("id");
@@ -511,7 +520,8 @@ public class DBManager {
     
     public long getNextIdLoginTable() throws SQLException {
         long currentId = -1;
-        query = "SELECT id FROM LoginTable ORDER BY id DESC LIMIT 1";
+        query = "SELECT id FROM LoginTable ORDER BY id DESC";
+        st.setMaxRows(1);
         resObj = st.executeQuery(query);
         while (resObj.next()) {
             currentId = resObj.getLong("id");
